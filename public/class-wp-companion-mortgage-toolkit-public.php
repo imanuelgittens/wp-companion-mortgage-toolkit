@@ -47,7 +47,7 @@ class Wp_Companion_Mortgage_Toolkit_Public {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
@@ -73,7 +73,7 @@ class Wp_Companion_Mortgage_Toolkit_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-companion-mortgage-toolkit-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wp-companion-mortgage-toolkit-public.css', array(), $this->version, 'all');
 
 	}
 
@@ -96,8 +96,12 @@ class Wp_Companion_Mortgage_Toolkit_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-companion-mortgage-toolkit-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/wp-companion-mortgage-toolkit-public.js', array('jquery'), $this->version, false);
 
+	}
+
+	public function wp_companion_mortgage_calculator_shortcode($atts) {
+		return 'Hello World!';
 	}
 
 }

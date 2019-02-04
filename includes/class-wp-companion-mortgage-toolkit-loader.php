@@ -42,14 +42,25 @@ class Wp_Companion_Mortgage_Toolkit_Loader {
 	protected $filters;
 
 	/**
-	 * Initialize the collections used to maintain the actions and filters.
+	 * The array of shortcodes registered with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $shortcodes    The shortcodes registered with WordPress to fire when the plugin loads.
+	 */
+	protected $shortcodes;
+
+	/**
+	 * Initialize the collections used to maintain the actions, filters and shortcodes.
 	 *
 	 * @since    1.0.0
 	 */
+	
 	public function __construct() {
 
 		$this->actions = array();
 		$this->filters = array();
+		$this->shortcodes = array();
 
 	}
 
@@ -110,6 +121,19 @@ class Wp_Companion_Mortgage_Toolkit_Loader {
 	}
 
 	/**
+     * Add a new shortcode to the collection to be registered with WordPress
+     *
+     * @since     1.0.0
+     * @param     string        $tag           The name of the new shortcode.
+     * @param     object        $component      A reference to the instance of the object on which the shortcode is defined.
+     * @param     string        $callback       The name of the function that defines the shortcode.
+     */
+    public function add_shortcode( $tag, $component, $callback, $priority = 10, $accepted_args = 2 ) {
+        $this->shortcodes = $this->add( $this->shortcodes, $tag, $component, $callback, $priority, $accepted_args );
+    }
+
+
+	/**
 	 * Register the filters and actions with WordPress.
 	 *
 	 * @since    1.0.0
@@ -122,6 +146,10 @@ class Wp_Companion_Mortgage_Toolkit_Loader {
 
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+		}
+
+		foreach ( $this->shortcodes as $hook ) {
+			add_shortcode( $hook['hook'], array( $hook['component'], $hook['callback'] ));
 		}
 
 	}
