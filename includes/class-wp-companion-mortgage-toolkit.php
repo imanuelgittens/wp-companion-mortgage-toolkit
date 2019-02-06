@@ -67,7 +67,7 @@ class Wp_Companion_Mortgage_Toolkit {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
+		if (defined('PLUGIN_NAME_VERSION')) {
 			$this->version = PLUGIN_NAME_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -103,24 +103,24 @@ class Wp_Companion_Mortgage_Toolkit {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-companion-mortgage-toolkit-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wp-companion-mortgage-toolkit-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-companion-mortgage-toolkit-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wp-companion-mortgage-toolkit-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-companion-mortgage-toolkit-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-wp-companion-mortgage-toolkit-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-companion-mortgage-toolkit-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-wp-companion-mortgage-toolkit-public.php';
 
 		$this->loader = new Wp_Companion_Mortgage_Toolkit_Loader();
 
@@ -139,7 +139,7 @@ class Wp_Companion_Mortgage_Toolkit {
 
 		$plugin_i18n = new Wp_Companion_Mortgage_Toolkit_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 
 	}
 
@@ -152,10 +152,10 @@ class Wp_Companion_Mortgage_Toolkit {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Wp_Companion_Mortgage_Toolkit_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Wp_Companion_Mortgage_Toolkit_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
 	}
 
@@ -168,10 +168,11 @@ class Wp_Companion_Mortgage_Toolkit {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Wp_Companion_Mortgage_Toolkit_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Wp_Companion_Mortgage_Toolkit_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+		$this->loader->add_shortcode('wpcomp_mortgage_calculator', $plugin_public, 'define_mortgage_calculator_shortcode');
 
 	}
 
@@ -218,14 +219,14 @@ class Wp_Companion_Mortgage_Toolkit {
 	/**
 	 *  Calculate the monthly payment value on a mortgage
 	 *
-	 * @since 1.0.0 
+	 * @since 1.0.0
 	 * @return  number The mortgage payment value
 	 * @var      number    $loan_amount    The amount the customer wishes to borrow
 	 */
 
-	public function calculate_monthly_mortgage_payment($loan_amount, $num_months, $rate, $downpayment){
+	public function calculate_monthly_mortgage_payment($loan_amount, $num_months, $rate, $downpayment) {
 		$rate_percentage = $rate / 100;
-		$monthly_payment = $loan_amount * (1 / 12) * pow((1 + $rate_percentage / 12), $num_months) / (pow((1 + $rate_percentage/12), $num_months) - 1);
+		$monthly_payment = $loan_amount * (1 / 12) * pow((1 + $rate_percentage / 12), $num_months) / (pow((1 + $rate_percentage / 12), $num_months) - 1);
 		return $monthly_payment;
 	}
 

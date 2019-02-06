@@ -74,6 +74,7 @@ class Wp_Companion_Mortgage_Toolkit_Public {
 		 */
 
 		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/wp-companion-mortgage-toolkit-public.css', array(), $this->version, 'all');
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/bootstrap/css/bootstrap.min.css', array(), $this->version, 'all');
 
 	}
 
@@ -100,8 +101,27 @@ class Wp_Companion_Mortgage_Toolkit_Public {
 
 	}
 
-	public function wp_companion_mortgage_calculator_shortcode($atts) {
-		return 'Hello World!';
+	public function define_mortgage_calculator_shortcode($atts) {
+		return '
+		<div id="wp-companion-mortgage-toolkit" class="wp-companion-mortgage-wrapper">
+			<div class="wp-companion-mortgage__calculator">
+				<form class="wp-companion-mortgage__calculator-form">
+					<input type="text" placeholder="Enter amount you wish to borrow"/>
+					<select>
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+						<option value="25">25</option>
+						<option value="30">30</option>
+					</select>
+					<input type="text" placeholder="Enter the rate"/>
+					<input type="text" placeholder="Enter a downpayment (if applicable)"/>
+					<input type="submit" value="Calculate Monthly Payment"/>
+				</form>
+			</div>
+		</div>
+	';
 	}
 
 }
