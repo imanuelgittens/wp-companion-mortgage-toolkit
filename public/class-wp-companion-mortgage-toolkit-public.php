@@ -101,27 +101,18 @@ class Wp_Companion_Mortgage_Toolkit_Public {
 
 	}
 
+	/**
+	 * This function is used to include the calculator's front facing elements
+	 *
+	 * @since 1.0.0
+	 * @return  ''
+	 * @param array 		$atts User defined attributes in shortcode tag
+	 *
+	 *
+	 */
+
 	public function define_mortgage_calculator_shortcode($atts) {
-		return '
-		<div id="wp-companion-mortgage-toolkit" class="wp-companion-mortgage-wrapper">
-			<div class="wp-companion-mortgage__calculator">
-				<form class="wp-companion-mortgage__calculator-form">
-					<input type="text" placeholder="Enter amount you wish to borrow"/>
-					<select>
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-						<option value="25">25</option>
-						<option value="30">30</option>
-					</select>
-					<input type="text" placeholder="Enter the rate"/>
-					<input type="text" placeholder="Enter a downpayment (if applicable)"/>
-					<input type="submit" value="Calculate Monthly Payment"/>
-				</form>
-			</div>
-		</div>
-	';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/partials/wp-companion-mortgage-toolkit-public-display.php';
 	}
 
 }

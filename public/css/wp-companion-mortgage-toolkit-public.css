@@ -7,6 +7,8 @@
 	width:100%;
 	height: auto;
 	font-family: inherit;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 }
 
@@ -16,8 +18,13 @@
 }
 
 #wp-companion-mortgage-toolkit .wp-companion-mortgage__calculator-form{
+	display:-webkit-box;
+	display:-ms-flexbox;
 	display:flex;
-	flex-direction: column;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 	width:100%;
 }
 

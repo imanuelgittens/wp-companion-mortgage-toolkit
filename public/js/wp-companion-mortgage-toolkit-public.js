@@ -28,5 +28,20 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+	
+	$(function() {
+
+		var mortgageForm = $('.wp-companion-mortgage__calculator-form');
+		mortgageForm.submit(handleMortgageFormSubmit);
+	 
+	 });
+
+	function handleMortgageFormSubmit(event){
+		event.preventDefault();
+
+		var loanAmount = event.target.mortgageAmount.value;
+		console.log(loanAmount);
+		
+	}
 
 })( jQuery );
